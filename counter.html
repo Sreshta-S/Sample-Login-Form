@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Counter</title>
+<style>
+  body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      margin: 0;
+  }
+  h1 {
+      color: #333;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+  }
+  .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: rgba(255,255,255,0.8);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  button {
+      width: 70px;
+      height: 70px;
+      font-size: 2rem;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+  button:hover {
+      background-color: #81c784;
+      transform: scale(1.1);
+  }
+  #counting {
+      font-size: 3rem;
+      color: #333;
+      width: 80px;
+      text-align: center;
+  }
+</style>
+</head>
+<body>
+<h1>Prime Counter</h1>
+<div class="container">            
+    <button onclick="decrement()">-</button>
+    <div id="counting">2</div>
+    <button onclick="increment()">+</button>        
+</div>
+<script>
+let prime = 2;
+const counter = document.getElementById("counting");
+counter.innerText = prime;
+const isPrime = n => n > 1 && ![...Array(Math.floor(Math.sqrt(n)) - 1)].some((_, i) => n % (i + 2) === 0);
+const nextPrime = n => { do n++; while(!isPrime(n)); return n; }
+const prevPrime = n => { do n--; while(n>1 && !isPrime(n)); return n>1?n:2; }
+function increment() {
+    prime = nextPrime(prime);
+    counter.innerText = prime;
+}
+function decrement() {
+    prime = prevPrime(prime);
+    counter.innerText = prime;
+}
+</script>
+</body>
+</html>

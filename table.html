@@ -1,0 +1,118 @@
+<html>
+<head>
+    <title>Student Marks Table</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            padding: 40px;
+        }
+        h2 {
+            font-size: 23px;
+            text-align: center;
+            padding: 10px;
+        }
+        table {
+            width: 500px;
+            border-collapse: collapse;
+            background: white;
+            margin: auto;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background: #4c6ef5;
+            color: white;
+        }
+        td[contenteditable="true"] {
+            background: #fff9c4;
+            outline: none;
+        }
+        .summary {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Marks List</h2>
+<table id="studentTable">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Marks</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Olivia</td>
+            <td contenteditable="true">85</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Bob</td>
+            <td contenteditable="true">40</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Charlie</td>
+            <td contenteditable="true">72</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Diana</td>
+            <td contenteditable="true">29</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<div class="summary">
+    <p id="total"></p>
+    <p id="pass"></p>
+    <p id="fail"></p>
+</div>
+<script>
+function calculateResults() {
+    const rows = document.querySelectorAll("#studentTable tbody tr");
+    let pass = 0, fail = 0;
+
+    rows.forEach(row => {
+        const marks = parseInt(row.cells[2].textContent) || 0;
+        if (marks >= 35) {
+            row.cells[3].textContent = "Pass";
+            row.cells[3].style.color = "green";
+            pass++;
+        } else {
+            row.cells[3].textContent = "Fail";
+            row.cells[3].style.color = "red";
+            fail++;
+        }
+    });
+    document.getElementById("total").textContent = "Total Students: " + rows.length;
+    document.getElementById("pass").textContent = "Passed: " + pass;
+    document.getElementById("fail").textContent = "Failed: " + fail;
+}
+calculateResults();
+document.querySelectorAll('#studentTable tbody td[contenteditable="true"]').forEach(cell => {
+    cell.addEventListener('input', calculateResults);
+    cell.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>My Page</title>
+<style>
+    body{
+        font-family: 'Poppins',sans-serif;
+        background: #cfd1cf;
+        padding: 20px;
+        font-size: 20px;
+        margin:10px 0;
+    }
+    h1{
+        font-size: 26px;
+        text-align: center;
+        color: #4caf50;
+    }
+</style>
+</head>
+<body>
+        <h1>SEASONS</h1>
+        <form onsubmit = "return showseason()">
+        <label for="num">Enter a Number(1 - 4) :</label><br>
+        <input type="number" id="num" name="num"> 
+        <input type = "submit" value= "result">
+</form>
+        <p id="result"></p>
+<script>
+        function showseason(){
+            num=parseInt(document.getElementById("num").value);
+            let text ="";
+        switch(num)
+        {
+        case 1: text = "Spring" ; break;
+        case 2: text = "Autumn" ;break;
+        case 3: text= "Winter" ;break;
+        case 4: text = "Summer" ;break;
+        default: text = "Enter a Valid input!";
+        }
+        document.getElementById("result").innerText=text;
+        return false;
+    }
+</script>
+</body>
+</html>
